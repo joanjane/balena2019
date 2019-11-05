@@ -16,7 +16,8 @@ module.exports = class App {
 		};
 	}
 
-	start() {
+	async start() {
+		await this.display.connect();
 		this.reset();
 
 		this.client = new Client(env.SERVER_URI)
@@ -59,15 +60,17 @@ module.exports = class App {
 	}
 
 	listenJoystick() {
-		this.joystick.listen()
-			.onPress((direction) => {
-				console.log('The joystick was pressed ' + direction);
-				this.processMovement(direction);
-			})
-			.onHold((direction) => {
-				console.log('The joystick is being held ' + direction);
-				this.processMovement(direction);
-			});
+		this.joystick.connect().then(() => {
+			this.joystick
+				.on('press', (direction) => {
+					console.log('The joystick was pressed ' + direction);
+					this.processMovement(direction);
+				})
+				.on('hold', (direction) => {
+					console.log('The joystick is being held ' + direction);
+					this.processMovement(direction);
+				});
+		})
 	}
 
 	messageReceived(message) {

@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "Demo application done in balena hackathon session in 2019",
   "scripts": {
-    "start": "node run-app.js",
-    "server": "node run-server.js",
-    "simulator": "node run-simulator.js",
-    "message": "node run-message.js"
+    "start": "node --experimental-modules run-app.js",
+    "server": "node --experimental-modules run-server.js",
+    "simulator": "node --experimental-modules run-simulator.js",
+    "message": "node --experimental-modules run-message.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   "homepage": "https://github.com/Duber/balena2019",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "pi-sense-hat-remote-simulator": "git+https://github.com/joanjane/pi-sense-hat-remote-simulator.git",
     "ws": "^7.2.0"
   },
   "devDependencies": {
