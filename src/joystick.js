@@ -15,9 +15,10 @@ function simulatorJoystickFactory() {
 }
 
 class Joystick {
-    connect() {
+    connect(onOpen) {
         require('node-sense-hat').Joystick.getJoystick().then(joystick => {
             this.joystick = joystick;
+            onOpen && onOpen();
 
             this.joystick.on('press', (direction) => {
                 this.onPressListeners.forEach(listener => listener(direction));

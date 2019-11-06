@@ -23,15 +23,15 @@ module.exports = class App {
 			.connect()
 			.onOpen(() => {
 				console.log('Connected');
-				this.display.connect();
+				this.display.connect(() => {
+					this.render();
+				});
 				this.listenJoystick();
 			})
 			.onMessage((message) => {
 				console.log('Received message\n', message);
 				this.messageReceived(message);
 			});
-
-		this.interval = setInterval(() => this.drawBall(), env.RATE);
 	}
 
 	stop() {
@@ -51,7 +51,7 @@ module.exports = class App {
 		]
 	}
 
-	drawBall() {
+	render() {
 		this.display.clear();
 
 		this.balls.forEach((ball) => {
@@ -93,6 +93,7 @@ module.exports = class App {
 				this.receiveFromWest(message.ball)
 				break;
 		}
+		this.render();
 	}
 
 	sendNorth(ball) {
@@ -201,7 +202,9 @@ module.exports = class App {
 
 	processMovement(direction) {
 		if (direction === 'click') {
-			return this.reset();
+			this.reset();
+			this.render();
+			return;
 		}
 
 		var vector = this.directionToVector(direction);
@@ -278,6 +281,7 @@ module.exports = class App {
 			}
 		});
 		this.balls = newBalls;
+		this.render();
 	}
 
 	directionToVector(direction) {

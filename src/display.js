@@ -20,8 +20,9 @@ class Display {
         this.senseHatLeds = null;
     }
 
-    connect() {
+    connect(onOpen) {
         this.senseHatLeds = require('sense-hat-led');
+        onOpen();
     }
 
     close() {
