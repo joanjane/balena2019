@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Duber/balena2019.git"
+    "url": "git+https://github.com/joanjane/balena2019.git"
   },
   "author": "Joan Jané, Miguel Cruz, Borja Ruiz, Christian Arenas",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/Duber/balena2019",
+  "homepage": "https://github.com/joanjane/balena2019",
   "dependencies": {
     "dotenv": "^8.2.0",
     "pi-sense-hat-remote-simulator": "git+https://github.com/joanjane/pi-sense-hat-remote-simulator.git",
