@@ -16,14 +16,14 @@ module.exports = class App {
 		};
 	}
 
-	async start() {
-		await this.display.connect();
+	start() {
 		this.reset();
 
 		this.client = new Client(env.SERVER_URI)
 			.connect()
 			.onOpen(() => {
 				console.log('Connected');
+				this.display.connect();
 				this.listenJoystick();
 			})
 			.onMessage((message) => {
@@ -60,17 +60,16 @@ module.exports = class App {
 	}
 
 	listenJoystick() {
-		this.joystick.connect().then(() => {
-			this.joystick
-				.on('press', (direction) => {
-					console.log('The joystick was pressed ' + direction);
-					this.processMovement(direction);
-				})
-				.on('hold', (direction) => {
-					console.log('The joystick is being held ' + direction);
-					this.processMovement(direction);
-				});
-		})
+		this.joystick.connect();
+		this.joystick.on('press', (direction) => {
+			console.log('The joystick was pressed ' + direction);
+			this.processMovement(direction);
+		});
+
+		this.joystick.on('hold', (direction) => {
+			console.log('The joystick is being held ' + direction);
+			this.processMovement(direction);
+		});
 	}
 
 	messageReceived(message) {
