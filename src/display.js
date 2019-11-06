@@ -8,39 +8,15 @@ function remoteDisplayClientFactory() {
     return display;
 }
 
+function displayFactory() {
+    const { Display } = require('pi-sense-hat-library/cjs/display');
+    const display = new Display();
+
+    return display;
+}
 
 module.exports.createDisplay = () => {
     return env.MODE === 'simulator' ?
         remoteDisplayClientFactory() :
-        new Display();
+        displayFactory();
 };
-
-class Display {
-    constructor() {
-        this.senseHatLeds = null;
-    }
-
-    connect(onOpen) {
-        this.senseHatLeds = require('sense-hat-led');
-        onOpen();
-    }
-
-    close() {
-    }
-
-    clear() {
-        this.senseHatLeds.clear();
-    }
-    
-    showMessage(message, speed, color, done) {
-        this.senseHatLeds.showMessage(message, speed, color, done);
-    }
-
-    setPixel(x, y, color) {
-        this.senseHatLeds.setPixel(x, y, color);
-    }
-    
-    render() {
-        this.senseHatLeds.setPixel(x, y, color);
-    }
-}
