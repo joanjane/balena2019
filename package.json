@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/Duber/balena2019.git"
   },
-  "author": "Cameron Diver <cameron@resin.io>",
+  "author": "Joan Jané, Miguel Cruz, Borja Ruiz, Christian Arenas",
   "license": "Apache-2.0",
   "homepage": "https://github.com/Duber/balena2019",
   "dependencies": {
