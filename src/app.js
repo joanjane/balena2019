@@ -58,7 +58,9 @@ module.exports = class App {
 			this.displayMatrix[ball.y * this.config.xmax + ball.x] = ball.color;
 		});
 
-		this.display.setPixels(this.displayMatrix);
+		setTimeout(() => 
+			this.display.setPixels(this.displayMatrix)
+		);
 	}
 
 	listenJoystick() {
