@@ -1,6 +1,6 @@
 {
   "name": "balena-2019-hackathon",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Demo application done in balena hackathon session in 2019",
   "scripts": {
     "start": "node run-app.js",
