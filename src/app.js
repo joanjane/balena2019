@@ -8,10 +8,11 @@ module.exports = class App {
 	constructor() {
 		this.device = env.DEVICE;
 		this.display = createDisplay();
+		this.displayMatrix = emptyDisplay();
 		this.joystick = createJoystick();
 		this.config = {
-			xmax: 7,
-			ymax: 7,
+			xmax: 8,
+			ymax: 8,
 			color: env.BALL_COLOR
 		};
 	}
@@ -35,10 +36,8 @@ module.exports = class App {
 	}
 
 	stop() {
-		if (this.interval) {
-			clearInterval(this.interval);
-			this.interval = null;
-		}
+		this.display.close();
+		this.joystick.close();
 	}
 
 	reset() {
@@ -48,15 +47,18 @@ module.exports = class App {
 				x: env.BALL_X,
 				y: env.BALL_Y
 			}
-		]
+		];
+		this.displayMatrix = emptyDisplay();
 	}
 
 	render() {
-		this.display.clear();
+		this.displayMatrix = emptyDisplay();
 
 		this.balls.forEach((ball) => {
-			this.display.setPixel(ball.x, ball.y, ball.color);
+			this.displayMatrix[ball.y * this.config.xmax + ball.x] = ball.color;
 		});
+
+		this.display.setPixels(this.displayMatrix);
 	}
 
 	listenJoystick() {
@@ -117,7 +119,7 @@ module.exports = class App {
 	}
 
 	westExit(ball) {
-		return ball.x > this.config.xmax;
+		return ball.x > this.config.xmax - 1;
 	}
 
 	northExit(ball) {
@@ -125,7 +127,7 @@ module.exports = class App {
 	}
 
 	southExit(ball) {
-		return ball.y > this.config.ymax;
+		return ball.y > this.config.ymax - 1;
 	}
 
 	receiveFromNorth(ball) {
@@ -297,3 +299,15 @@ module.exports = class App {
 		}
 	}
 }
+
+const O = '#000000';
+const emptyDisplay = () => [
+  O, O, O, O, O, O, O, O,
+  O, O, O, O, O, O, O, O,
+  O, O, O, O, O, O, O, O,
+  O, O, O, O, O, O, O, O,
+  O, O, O, O, O, O, O, O,
+  O, O, O, O, O, O, O, O,
+  O, O, O, O, O, O, O, O,
+  O, O, O, O, O, O, O, O
+];

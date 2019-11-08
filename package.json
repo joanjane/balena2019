@@ -17,8 +17,8 @@
   "homepage": "https://github.com/joanjane/balena2019",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "pi-sense-hat-remote-simulator": "git+https://github.com/joanjane/pi-sense-hat-remote-simulator.git",
     "pi-sense-hat-library": "git+https://github.com/joanjane/pi-sense-hat-library.git",
+    "pi-sense-hat-remote-simulator": "git+https://github.com/joanjane/pi-sense-hat-remote-simulator.git",
     "ws": "^7.2.0"
   },
   "devDependencies": {
